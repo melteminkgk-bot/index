@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Analiz & Hizmetlerimiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- TEMA DEĞİŞKENLERİ --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(17, 17, 19, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --text-muted: #888888;
+            --accent-green: #24FFB3;
+            --header-border: rgba(255, 255, 255, 0.05);
+        }
+
+        body.light-theme {
+            --bg-color: #f5f6f9;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text-color: #111111;
+            --text-muted: #666666;
+            --header-border: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .highlight {
+            color: var(--accent-green);
+        }
+
+        .sub-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            color: var(--accent-green);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* --- 0. HEADER --- */
+        .main-header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--header-border);
+            background: var(--bg-color);
+        }
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-switch {
+            width: 52px;
+            height: 28px;
+            background-color: #38383c;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 3px;
+        }
+        .switch-circle {
+            width: 22px;
+            height: 22px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 0.7rem;
+            transform: translateX(24px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body.light-theme .switch-circle {
+            transform: translateX(0px);
+            background-color: #111111;
+            color: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .btn-header-login {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            padding: 10px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-header-login:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        /* --- 1. HERO SECTION --- */
+        .hero-section {
+            padding: 70px 0 100px 0;
+            position: relative;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .hero-content {
+            flex: 1;
+            z-index: 5;
+        }
+        .hero-content h1 {
+            font-size: 3.6rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 460px;
+        }
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        .btn-store {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s ease;
+        }
+
+        .hero-visual-orbit {
+            flex: 1.2;
+            position: relative;
+            height: 580px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit-line {
+            position: absolute;
+            border: 1.5px solid rgba(36, 255, 179, 0.25);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(36, 255, 179, 0.08);
+        }
+        .orbit-1 { width: 380px; height: 380px; }
+        .orbit-2 { width: 500px; height: 500px; border-style: dashed; opacity: 0.7; }
+        .orbit-3 { width: 620px; height: 620px; }
+        .orbit-4 { width: 740px; height: 740px; opacity: 0.35; }
+
+        /* İşaretlediğin yerlerdeki küçük halkalı görseller (`images/img.png`) */
+        .orbit-badge {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-green);
+            overflow: hidden;
+            z-index: 10;
+            background: #000;
+            box-shadow: 0 0 16px rgba(36, 255, 179, 0.8);
+        }
+        .orbit-badge img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* İkinci görselde işaretlediğin boşluklara tam oturan koordinatlar */
+        .badge-1 { top: 18%; left: 35%; }
+        .badge-2 { top: 48%; left: 2%; }
+        .badge-3 { bottom: 12%; left: 32%; }
+        .badge-4 { top: 48%; right: 2%; }
+        .badge-5 { bottom: 12%; right: 32%; }
+
+        .cards-column-group {
+            display: flex;
+            gap: 18px;
+            z-index: 2;
+            align-items: center;
+        }
+        .card-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .card-col.col-offset {
+            margin-top: 25px;
+        }
+        .vertical-profile-card {
+            width: 140px;
+            height: 155px;
+            border-radius: 36px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            background: var(--card-bg);
+        }
+        .vertical-profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- 2. HİZMETLERİMİZ (MARQUEE) --- */
+        .services-nav-section {
+            text-align: center;
+            padding: 70px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .services-nav-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #c0c0c0;
+        }
+        .services-nav-section p {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 35px;
+        }
+
+        .marquee-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 30px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 18px;
+            width: max-content;
+        }
+
+        .marquee-left { animation: scrollLeft 35s linear infinite; }
+        .marquee-right { animation: scrollRight 35s linear infinite; }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .marquee-track:hover { animation-play-state: paused; }
+
+        .pill-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 40px;
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 0 0 auto;
+            min-width: 210px;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .pill-item:hover { border-color: var(--accent-green); transform: translateY(-3px); }
+        .pill-item .pill-info { text-align: left; }
+        .pill-item .pill-title { font-size: 0.9rem; font-weight: 600; color: var(--text-color); }
+        .pill-item .pill-tag { font-size: 0.7rem; color: var(--text-muted); }
+        .pill-item.active { border-color: rgba(36, 255, 179, 0.4); background: rgba(36, 255, 179, 0.05); }
+        .pill-item.special-glow { background: linear-gradient(135deg, #a855f7, #38bdf8); border: none; color: #fff; padding: 14px 32px; }
+
+        /* --- 3. DETAYLI HİZMET KARTLARI --- */
+        .services-grid-section { padding: 80px 0; background: radial-gradient(circle at center, rgba(36, 255, 179, 0.03), transparent 70%); }
+        .services-grid-section h2 {
+            text-align: center;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #c0c0c0;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .services-grid-section p.section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 50px;
+        }
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1080px; margin: 0 auto; }
+        .service-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 35px; text-align: left; position: relative; transition: 0.3s; }
+        .card-top-icon { width: 46px; height: 46px; border-radius: 50%; background: rgba(36, 255, 179, 0.1); color: var(--accent-green); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; margin-bottom: 20px; }
+        .card-free-tag { position: absolute; top: 35px; right: 35px; font-size: 0.78rem; color: var(--text-muted); }
+        .service-card h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 12px; }
+        .service-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+        .service-card.pro-neon-card { background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%); border: none; color: #fff; }
+        .service-card.pro-neon-card .card-top-icon { background: rgba(255, 255, 255, 0.2); color: #fff; }
+        .service-card.pro-neon-card .card-free-tag { color: #fff; font-weight: 600; }
+        .service-card.pro-neon-card p { color: rgba(255, 255, 255, 0.85); }
+
+        /* --- 4. FEATURE SECTIONS --- */
+        .feature-block { padding: 90px 0; border-top: 1px solid var(--header-border); }
+        .feature-flex { display: flex; align-items: center; gap: 80px; }
+        .feature-flex.reverse { flex-direction: row-reverse; }
+        .feature-text { flex: 1.1; }
+        .feature-visual { flex: 0.9; display: flex; justify-content: center; }
+        .feature-text h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 18px; line-height: 1.25; }
+        .feature-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+        .feature-ul { list-style: none; }
+        .feature-ul li { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+
+        .tracker-mockup-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .combined-phone-img {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            filter: drop-shadow(0 25px 50px rgba(0,0,0,0.8));
+        }
+
+        /* AKILLİ HASHTAG SEKSİYONU */
+        .smart-hashtag-container {
+            position: relative;
+            width: 440px;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hashtag-orbit-bg {
+            position: absolute;
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .h-orbit-1 { width: 280px; height: 280px; }
+        .h-orbit-2 { width: 380px; height: 380px; }
+
+        .main-trio-wrapper {
+            position: relative;
+            width: 320px;
+            height: 290px;
+        }
+
+        .trio-circle {
+            position: absolute;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .trio-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .trio-top {
+            width: 145px;
+            height: 145px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px solid var(--accent-green);
+            z-index: 3;
+        }
+        .trio-left {
+            width: 135px;
+            height: 135px;
+            bottom: 10px;
+            left: 20px;
+            z-index: 2;
+        }
+        .trio-right {
+            width: 135px;
+            height: 135px;
+            bottom: 10px;
+            right: 20px;
+            z-index: 2;
+        }
+
+        .trio-mini {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            z-index: 5;
+            background: var(--card-bg);
+            box-shadow: 0 0 12px rgba(0,0,0,0.5);
+        }
+        .trio-mini img { width: 100%; height: 100%; object-fit: cover; }
+        .mini-top-left { top: 20px; left: 55px; }
+        .mini-top-right { top: 20px; right: 55px; }
+        .mini-bottom { bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+        .btn-figma-dark {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            padding: 12px 26px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-figma-dark:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        /* --- 5. SSS SEKTÖRÜ --- */
+        .faq-section { padding: 100px 0; background: var(--bg-color); }
+        .faq-grid { display: flex; gap: 60px; align-items: center; }
+        .accordion-box { flex: 1.2; }
+        .accordion-item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; margin-bottom: 14px; overflow: hidden; transition: 0.3s; }
+        .accordion-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--text-color); }
+        .accordion-header i { background: rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; color: var(--text-muted); }
+        .accordion-body { padding: 0 24px 22px 24px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; display: none; }
+        .accordion-item.active { border-left: 4px solid var(--accent-green); }
+        .accordion-item.active .accordion-body { display: block; }
+
+        .faq-character-wrapper { flex: 0.9; display: flex; justify-content: center; align-items: flex-end; }
+        .faq-character-wrapper img { width: 100%; max-width: 360px; height: auto; display: block; object-fit: contain; border-radius: 24px; }
+
+        /* --- 6. MUTLU MÜŞTERİLERİMİZ --- */
+        .testimonials-section { padding: 80px 0; position: relative; overflow: visible; }
+        
+        .testimonials-unified-wrapper {
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+            width: 100%;
+        }
+
+        .character-left-side { 
+            position: relative;
+            left: 10px;
+            z-index: 1; 
+            flex-shrink: 0;
+            margin-right: -100px;
+        }
+        .character-left-side img { 
+            width: 440px; 
+            height: auto; 
+            display: block; 
+            object-fit: contain; 
+        }
+
+        .testimonials-right { 
+            flex: 1; 
+            position: relative;
+            z-index: 10; 
+            padding-top: 130px;
+        }
+        
+        .testimonials-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .reviews-nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .review-nav-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #111113;
+            border: 1px solid rgba(36, 255, 179, 0.2);
+            color: #24FFB3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .review-nav-btn:hover {
+            background: #24FFB3;
+            color: #000;
+        }
+
+        .reviews-scroll-container {
+            position: relative;
+            height: 380px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            padding-right: 5px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0.15) 92%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0.15) 92%, rgba(0,0,0,0) 100%);
+        }
+        .reviews-scroll-container::-webkit-scrollbar { display: none; }
+
+        .testimonials-grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 10px; }
+
+        .review-card { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border); 
+            border-radius: 14px; 
+            padding: 18px; 
+            margin-bottom: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .review-user { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .review-user img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+        .review-user h4 { font-size: 0.85rem; font-weight: 600; }
+        .review-stars { color: #f1c40f; font-size: 0.75rem; }
+        .review-card p { color: var(--text-muted); font-size: 0.78rem; line-height: 1.5; }
+
+        /* --- FOOTER --- */
+        .site-footer { background-color: var(--bg-color); border-top: 1px solid var(--header-border); padding: 70px 0 30px 0; }
+        .footer-container { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; align-items: start; }
+        .footer-col h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 20px; color: var(--text-color); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
+        .footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--accent-green); margin-bottom: 15px; }
+        .brand-col p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 22px; line-height: 1.6; }
+        .social-links { display: flex; gap: 12px; }
+        .social-links a { width: 38px; height: 38px; border-radius: 50%; background-color: var(--card-bg); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
+        .social-links a:hover { background-color: var(--accent-green); color: #000; }
+        .footer-phone { width: 100%; max-width: 160px; border-radius: 20px; display: block; margin-left: auto; }
+
+        @media (max-width: 992px) {
+            .hero-container, .feature-flex, .faq-grid, .testimonials-unified-wrapper { flex-direction: column !important; text-align: center; }
+            .services-grid, .testimonials-grid-3col { grid-template-columns: 1fr; }
+            .hero-visual-orbit { display: none; }
+            .footer-phone { margin: 20px auto 0 auto; }
+            .smart-hashtag-container { width: 100%; max-width: 360px; }
+            .testimonials-header-row { flex-direction: column; align-items: center; gap: 15px; }
+            .reviews-nav-buttons { justify-content: center; width: 100%; }
+            .character-left-side { left: 0; margin-right: 0; margin-bottom: 20px; }
+            .character-left-side img { width: 280px; margin: 0 auto; }
+            .testimonials-right { padding-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 0. HEADER -->
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="header-left">
+                <div class="theme-switch" id="themeBtn" onclick="toggleTheme()" title="Temayı Değiştir">
+                    <div class="switch-circle" id="switchIcon">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                </div>
+                <div class="logo-text">L O <span class="highlight">G O</span></div>
+            </div>
+            <nav class="nav-links">
+                <a href="#">Section 1</a>
+                <a href="#">Section 1</a>
+                <a href="#">Section 1</a>
+                <a href="#">Section 1</a>
+            </nav>
+            <button class="btn-header-login" onclick="startInstagramLogin()">
+                <i class="fa-brands fa-instagram"></i> Instagram ile Giriş Yap <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="sub-badge"><i class="fa-solid fa-fingerprint"></i> Instagram Analiz</span>
+                <h1>Instagram Hesabını <br>Detaylı <span class="highlight">Analiz</span> Et</h1>
+                <p>Takipçilerini analiz et, seni takip etmeyenleri ve engelleyenleri öğren. Hesabının tüm detaylarını görmek için Instagram ile giriş yap!</p>
+                <div class="download-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank" class="btn-store">
+                        <i class="fa-brands fa-google-play"></i> Google Play
+                    </a>
+                    <a href="https://apps.apple.com/tr/app/instagram/id389801252" target="_blank" class="btn-store">
+                        <i class="fa-brands fa-apple"></i> App Store
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual-orbit">
+                <!-- Yörünge Çizgileri -->
+                <div class="orbit-line orbit-1"></div>
+                <div class="orbit-line orbit-2"></div>
+                <div class="orbit-line orbit-3"></div>
+                <div class="orbit-line orbit-4"></div>
+
+                <!-- Küçük halkalı görseller (`images/img.png`) işaretlediğin yerlere yerleştirildi -->
+                <div class="orbit-badge badge-1"><img src="images/img.png" alt="Icon"></div>
+                <div class="orbit-badge badge-2"><img src="images/img.png" alt="Icon"></div>
+                <div class="orbit-badge badge-3"><img src="images/img.png" alt="Icon"></div>
+                <div class="orbit-badge badge-4"><img src="images/img.png" alt="Icon"></div>
+                <div class="orbit-badge badge-5"><img src="images/img.png" alt="Icon"></div>
+
+                <!-- Orijinal Asimetrik 9'lu Grid Yerleşimi -->
+                <div class="cards-column-group">
+                    <div class="card-col">
+                        <div class="vertical-profile-card"><img src="images/i2.png" alt="Profile 1"></div>
+                        <div class="vertical-profile-card">
+                            <img src="images/Image 3.jpg" onerror="this.onerror=null; this.src='images/Image 3.png';" alt="Ananaslı Adam">
+                        </div>
+                        <div class="vertical-profile-card"><img src="images/Image 10.png" alt="Profile 3"></div>
+                    </div>
+
+                    <div class="card-col col-offset">
+                        <div class="vertical-profile-card"><img src="images/image1.png" alt="Profile 4"></div>
+                        <div class="vertical-profile-card">
+                            <img src="images/image 25.png" onerror="this.onerror=null; this.src='images/image 25.jpg';" alt="Doğru Adam">
+                        </div>
+                        <div class="vertical-profile-card"><img src="images/Image 13.png" alt="Profile 6"></div>
+                    </div>
+
+                    <div class="card-col">
+                        <div class="vertical-profile-card"><img src="images/Image 7.png" alt="Profile 7"></div>
+                        <div class="vertical-profile-card"><img src="images/Image 8.png" alt="Profile 8"></div>
+                        <div class="vertical-profile-card"><img src="images/Image 15.png" alt="Profile 9"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. HİZMETLERİMİZ (MARQUEE) -->
+    <section class="services-nav-section">
+        <div class="container">
+            <span class="sub-badge">✦ Tüm Hizmetlerimiz ✦</span>
+            <h2>Hizmetlerimiz</h2>
+            <p>Instagram deneyiminizi zirveye taşıyacak profesyonel araçlar.</p>
+        </div>
+
+        <div class="marquee-container">
+            <div class="marquee-track marquee-right">
+                <div class="pill-item active">
+                    <i class="fa-solid fa-circle-play highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Reels Analizi</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-chart-simple highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Grafik Analizi</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item special-glow">
+                    <i class="fa-solid fa-ghost"></i>
+                    <div class="pill-info"><div class="pill-title">Gizli Hayranlarım</div><div class="pill-tag">♔ Pro Özellik</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-hashtag highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Hashtag Üret</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-pen highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Açıklama Üret</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-user-shield highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Profil Analizi</div><div class="pill-tag">♦ Yeni</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-shield-halved highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Engel Tespiti</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-chart-pie highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Etkileşim Oranı</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+            </div>
+
+            <div class="marquee-track marquee-left">
+                <div class="pill-item">
+                    <i class="fa-solid fa-robot highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Yapay Zeka Destekçi</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-heart-circle-bolt highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Beğeni Optimizasyonu</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-regular fa-user highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Fotoğraf Üretme</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-regular fa-images highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Gönderi Kontrolü</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-bell highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Anlık Bildirimler</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-camera-retro highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Hikaye Görüntüleme</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-bullseye highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Rakip Analizi</div><div class="pill-tag">♔ Pro</div></div>
+                </div>
+                <div class="pill-item">
+                    <i class="fa-solid fa-fire highlight"></i>
+                    <div class="pill-info"><div class="pill-title">Popüler Gönderiler</div><div class="pill-tag">♦ Ücretsiz</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. DETAYLI HİZMET KARTLARI -->
+    <section class="services-grid-section">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="sub-badge">✦ Tüm Hizmetlerimiz ✦</span>
+                <h2>Hizmet Yelpazemiz Ve Sunduğumuz <br> Ayrıcalıklar Hakkında Detaylı Bilgi Edinin.</h2>
+                <p class="section-desc">Buy and sell NFTs from the world's top artistsBuy and sell NFTs from</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-regular fa-user"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Profil Fotoğrafı Üret</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Hikaye Analizi</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-solid fa-circle-play"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Reels Analizi</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-regular fa-images"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Gönderilerim</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-solid fa-chart-simple"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Grafik Analizi</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-solid fa-hashtag"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Hashtag Üret</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-top-icon"><i class="fa-solid fa-pen"></i></div>
+                    <span class="card-free-tag">♦ Ücretsiz</span>
+                    <h3>Açıklama Üret</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+
+                <div class="service-card pro-neon-card">
+                    <div class="card-top-icon"><i class="fa-solid fa-ghost"></i></div>
+                    <span class="card-free-tag">♔ Pro Özellik</span>
+                    <h3>Gizli Hayranlarım</h3>
+                    <p>Our blockchain operates on a truly decentralized, peer-to-peer network powered by a distributed ledger system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. TAKİPÇİ HAREKETLERİ -->
+    <section class="feature-block">
+        <div class="container feature-flex">
+            <div class="feature-text">
+                <span class="sub-badge"><i class="fa-solid fa-fingerprint"></i> Takipçi Analizi</span>
+                <h2>Takipçi <span class="highlight">Hareketlerini</span> <br>Kolayca Analiz Et!</h2>
+                <p>Seni engelleyenleri, takipten çıkanları ve daha fazlasını zahmetsizce tespit et, hesabını daha bilinçli şekilde yönet.</p>
+                <ul class="feature-ul">
+                    <li><i class="fa-solid fa-circle-check highlight"></i> Kimlerin seni engellediğini kolayca öğren.</li>
+                    <li><i class="fa-solid fa-circle-check highlight"></i> Seni kimlerin takipten çıktığını anlık olarak analiz et.</li>
+                    <li><i class="fa-solid fa-circle-check highlight"></i> Takipçilerin davranışlarını incele.</li>
+                </ul>
+            </div>
+            
+            <div class="feature-visual">
+                <div class="tracker-mockup-wrapper">
+                    <img src="images/telefon.png" onerror="this.onerror=null; this.src='images/Screen Frame.png';" alt="Takipçi Analizi Telefon Görseli" class="combined-phone-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AKILLİ HASHTAG SEKSİYONU -->
+    <section class="feature-block">
+        <div class="container feature-flex reverse">
+            <div class="feature-text">
+                <div style="color: var(--accent-green); font-size: 1.8rem; margin-bottom: 15px;"><i class="fa-solid fa-fingerprint"></i></div>
+                <h2 style="font-size: 2.6rem;">Size Uygun <span class="highlight">Hashtag ve</span> <br><span class="highlight">Açıklamaları</span> Hızla Oluştur</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 30px;">
+                    İçeriğine en uygun ve popüler hashtag'leri otomatik seçerken, gönderine özel etkileyici açıklamalar oluşturur; böylece doğru içerik stratejisiyle etkileşimini hızla artırmana yardımcı olur.
+                </p>
+                <button class="btn-figma-dark" onclick="startInstagramLogin()">
+                    <i class="fa-brands fa-instagram" style="font-size: 1.1rem;"></i> Instagram ile Giriş Yap <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="feature-visual">
+                <div class="smart-hashtag-container">
+                    <div class="hashtag-orbit-bg h-orbit-1"></div>
+                    <div class="hashtag-orbit-bg h-orbit-2"></div>
+
+                    <div class="main-trio-wrapper">
+                        <div class="trio-circle trio-top">
+                            <img src="images/Rectangle 1934.png" alt="Rectangle 1934">
+                        </div>
+                        <div class="trio-circle trio-left">
+                            <img src="images/Rectangle 1928.png" alt="Rectangle 1928">
+                        </div>
+                        <div class="trio-circle trio-right">
+                            <img src="images/Rectangle 1929.png" alt="Rectangle 1929">
+                        </div>
+
+                        <div class="trio-mini mini-top-left">
+                            <img src="images/img (1).png" alt="img (1)">
+                        </div>
+                        <div class="trio-mini mini-top-right">
+                            <img src="images/oj.jpg" onerror="this.src='images/oj.png';" alt="oj">
+                        </div>
+                        <div class="trio-mini mini-bottom">
+                            <img src="images/img.png" alt="img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SSS SEKTÖRÜ -->
+    <section class="faq-section">
+        <div class="container faq-grid">
+            <div class="accordion-box">
+                <span class="sub-badge">✦ S.S.S ✦</span>
+                <h2 style="font-size: 2.2rem; margin-bottom: 25px;">Sıkça Sorulan Sorular</h2>
+                
+                <div class="accordion-item active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Lorem Ipsum Dolar Sit Amet?</span>
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                    <div class="accordion-body">
+                        Tüm kategorilerde kaliteli ve çok uygun fiyatlı servisler! Tüm kategorilerde kaliteli ve çok uygun fiyatlı servisler!
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Lorem Ipsum Dolar Sit Amet?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-body">
+                        Tüm kategorilerde kaliteli ve çok uygun fiyatlı servisler!
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Lorem Ipsum Dolar Sit Amet?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-body">
+                        Tüm kategorilerde kaliteli ve çok uygun fiyatlı servisler!
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Lorem Ipsum Dolar Sit Amet?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-body">
+                        Tüm kategorilerde kaliteli ve çok uygun fiyatlı servisler!
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Lorem Ipsum Dolar Sit Amet?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-body">
+                        Tüm kategorilerde kaliteli ve çok uygun fiyatlı servisler!
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-character-wrapper">
+                <img src="images/yeşil adam.png" alt="yeşil adam">
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. MUTLU MÜŞTERİLERİMİZ -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-unified-wrapper">
+                <div class="character-left-side">
+                    <img src="images/yeşil adam2.png" onerror="this.onerror=null; this.src='images/yeşil adam.png';" alt="Yeşil Adam 2">
+                </div>
+
+                <div class="testimonials-right">
+                    <div class="testimonials-header-row">
+                        <div>
+                            <h2><span class="highlight">Mutlu</span> Müşterilerimiz</h2>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">The best service in Spain. Lifetime warranty. Immediate delivery.</p>
+                        </div>
+                        <div class="reviews-nav-buttons">
+                            <div class="review-nav-btn" onclick="scrollReviews('up')" title="Yukarı Kaydır"><i class="fa-solid fa-arrow-down"></i></div>
+                            <div class="review-nav-btn" onclick="scrollReviews('down')" title="Aşağı Kaydır"><i class="fa-solid fa-arrow-up"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="reviews-scroll-container" id="reviewsContainer">
+                        <div class="testimonials-grid-3col">
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/Image 13.png" alt="U"><div><h4>Göktuğ Solmaz</h4><div class="review-stars">★★★★★ 4.5</div></div></div>
+                                <p>Hızlı bir şekilde SMS onay kodu alabilirsiniz. Lorem ipsum dolar sit amet.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/image1.png" alt="U"><div><h4>Zeynep Kaya</h4><div class="review-stars">★★★★★ 5.0</div></div></div>
+                                <p>Uygulama harika çalışıyor, takipçi analizini çok net gösteriyor.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/Image 10.png" alt="U"><div><h4>Ahmet Demir</h4><div class="review-stars">★★★★★ 4.8</div></div></div>
+                                <p>Gizli hayranlar özelliği inanılmaz, kesinlikle tavsiye ederim.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/Image 7.png" alt="U"><div><h4>Elif Şahin</h4><div class="review-stars">★★★★★ 4.9</div></div></div>
+                                <p>Açıklama üretici sayesinde gönderilerim çok daha fazla etkileşim alıyor.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/Image 8.png" alt="U"><div><h4>Can Çelik</h4><div class="review-stars">★★★★★ 4.2</div></div></div>
+                                <p>Arayüz tasarımı ve karanlık mod geçişi çok başarılı olmuş.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/i2.png" alt="U"><div><h4>Merve Aydın</h4><div class="review-stars">★★★★★ 5.0</div></div></div>
+                                <p>Tasarım ve hız mükemmel. Kesinlikle kullanmalısınız.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/image 25.png" onerror="this.src='images/image 25.jpg';" alt="U"><div><h4>Burak Yılmaz</h4><div class="review-stars">★★★★★ 4.7</div></div></div>
+                                <p>Engel tespiti ve takipçi hareketleri hayat kurtarıyor, çok teşekkürler.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/Image 3.jpg" onerror="this.onerror=null; this.src='images/Image 3.png';" alt="U"><div><h4>Selin Yıldız</h4><div class="review-stars">★★★★★ 4.6</div></div></div>
+                                <p>Hashtag önerileri sayesinde keşfete düşmem çok kolaylaştı.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-user"><img src="images/Image 15.png" alt="U"><div><h4>Oğuzhan Koç</h4><div class="review-stars">★★★★★ 4.9</div></div></div>
+                                <p>Kesinlikle piyasadaki en iyi Instagram analiz platformu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-col brand-col">
+                <h3 class="footer-logo">L O <span class="highlight">G O</span></h3>
+                <p>Instagram hesabınızı en üst düzeye çıkaran akıllı analiz ve hashtag otomasyon sistemi.</p>
+                <div class="download-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank" class="btn-store small-btn">
+                        <i class="fa-brands fa-google-play"></i> Google Play
+                    </a>
+                    <a href="https://apps.apple.com/tr/app/instagram/id389801252" target="_blank" class="btn-store small-btn">
+                        <i class="fa-brands fa-apple"></i> App Store
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>İletişim</h4>
+                <ul>
+                    <li><i class="fa-solid fa-phone"></i> +90 555 555 55 55</li>
+                    <li><i class="fa-solid fa-envelope"></i> info@siteadi.com</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Sosyal Medya</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col mockup-col">
+                <img class="footer-phone" src="images/Iphone Front.png" alt="Mockup">
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT KODLARI -->
+    <script>
+        function startInstagramLogin() {
+            const instagramUrl = 'https://www.instagram.com/accounts/login/';
+            const width = 500;
+            const height = 600;
+            const left = (window.innerWidth / 2) - (width / 2);
+            const top = (window.innerHeight / 2) - (height / 2);
+
+            window.open(
+                instagramUrl,
+                'InstagramLogin',
+                `toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=${width}, height=${height}, top=${top}, left=${left}`
+            );
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.querySelector('#switchIcon i');
+            
+            body.classList.toggle('light-theme');
+
+            if (body.classList.contains('light-theme')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const icon = element.querySelector('i');
+            
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                if(el !== item) {
+                    el.classList.remove('active');
+                    const otherIcon = el.querySelector('.accordion-header i');
+                    if(otherIcon) otherIcon.className = 'fa-solid fa-chevron-down';
+                }
+            });
+
+            item.classList.toggle('active');
+            if (item.classList.contains('active')) {
+                icon.className = 'fa-solid fa-chevron-up';
+            } else {
+                icon.className = 'fa-solid fa-chevron-down';
+            }
+        }
+
+        /* Yorumlar Bölümü Dikey Kaydırma Fonksiyonu */
+        function scrollReviews(direction) {
+            const container = document.getElementById('reviewsContainer');
+            const scrollAmount = 180;
+            if (direction === 'up') {
+                container.scrollTop -= scrollAmount;
+            } else {
+                container.scrollTop += scrollAmount;
+            }
+        }
+    </script>
+</body>
+</html>
