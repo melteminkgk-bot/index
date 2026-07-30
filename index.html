@@ -153,126 +153,20 @@
             transform: translateY(-2px);
         }
 
-        /* --- 1. HERO SECTION --- */
+        /* --- 1. HERO SECTION (başlık.png) --- */
         .hero-section {
-            padding: 70px 0 100px 0;
+            padding: 40px 0;
             position: relative;
-        }
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-        .hero-content {
-            flex: 1;
-            z-index: 5;
-        }
-        .hero-content h1 {
-            font-size: 3.6rem;
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 20px;
-        }
-        .hero-content p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 35px;
-            max-width: 460px;
-        }
-        .download-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        .btn-store {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid var(--card-border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s ease;
-        }
-
-        .hero-visual-orbit {
-            flex: 1.2;
-            position: relative;
-            height: 580px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .orbit-line {
-            position: absolute;
-            border: 1.5px solid rgba(36, 255, 179, 0.25);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            box-shadow: 0 0 20px rgba(36, 255, 179, 0.08);
-        }
-        .orbit-1 { width: 380px; height: 380px; }
-        .orbit-2 { width: 500px; height: 500px; border-style: dashed; opacity: 0.7; }
-        .orbit-3 { width: 620px; height: 620px; }
-        .orbit-4 { width: 740px; height: 740px; opacity: 0.35; }
-
-        /* İşaretlediğin yerlerdeki küçük halkalı görseller (`images/img.png`) */
-        .orbit-badge {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-green);
             overflow: hidden;
-            z-index: 10;
-            background: #000;
-            box-shadow: 0 0 16px rgba(36, 255, 179, 0.8);
+            background-color: #050505;
         }
-        .orbit-badge img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* İkinci görselde işaretlediğin boşluklara tam oturan koordinatlar */
-        .badge-1 { top: 18%; left: 35%; }
-        .badge-2 { top: 48%; left: 2%; }
-        .badge-3 { bottom: 12%; left: 32%; }
-        .badge-4 { top: 48%; right: 2%; }
-        .badge-5 { bottom: 12%; right: 32%; }
-
-        .cards-column-group {
-            display: flex;
-            gap: 18px;
-            z-index: 2;
-            align-items: center;
-        }
-        .card-col {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .card-col.col-offset {
-            margin-top: 25px;
-        }
-        .vertical-profile-card {
-            width: 140px;
-            height: 155px;
-            border-radius: 36px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            background: var(--card-bg);
-        }
-        .vertical-profile-card img {
+        .hero-banner-img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 1320px;
+            margin: 0 auto;
             display: block;
+            border-radius: 20px;
+            object-fit: contain;
         }
 
         /* --- 2. HİZMETLERİMİZ (MARQUEE) --- */
@@ -281,6 +175,7 @@
             padding: 70px 0;
             overflow: hidden;
             position: relative;
+            background: var(--bg-color);
         }
         .services-nav-section h2 {
             font-size: 2.5rem;
@@ -326,8 +221,6 @@
             0% { transform: translateX(-50%); }
             100% { transform: translateX(0); }
         }
-
-        .marquee-track:hover { animation-play-state: paused; }
 
         .pill-item {
             background: var(--card-bg);
@@ -612,24 +505,24 @@
         .review-stars { color: #f1c40f; font-size: 0.75rem; }
         .review-card p { color: var(--text-muted); font-size: 0.78rem; line-height: 1.5; }
 
-        /* --- FOOTER --- */
-        .site-footer { background-color: var(--bg-color); border-top: 1px solid var(--header-border); padding: 70px 0 30px 0; }
-        .footer-container { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; align-items: start; }
-        .footer-col h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 20px; color: var(--text-color); }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
-        .footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--accent-green); margin-bottom: 15px; }
-        .brand-col p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 22px; line-height: 1.6; }
-        .social-links { display: flex; gap: 12px; }
-        .social-links a { width: 38px; height: 38px; border-radius: 50%; background-color: var(--card-bg); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
-        .social-links a:hover { background-color: var(--accent-green); color: #000; }
-        .footer-phone { width: 100%; max-width: 160px; border-radius: 20px; display: block; margin-left: auto; }
+        /* --- FOOTER (enalt.png görseli entegrasyonu) --- */
+        .site-footer-banner {
+            background-color: var(--bg-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-banner-img {
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 20px;
+            object-fit: contain;
+        }
 
         @media (max-width: 992px) {
             .hero-container, .feature-flex, .faq-grid, .testimonials-unified-wrapper { flex-direction: column !important; text-align: center; }
             .services-grid, .testimonials-grid-3col { grid-template-columns: 1fr; }
-            .hero-visual-orbit { display: none; }
-            .footer-phone { margin: 20px auto 0 auto; }
             .smart-hashtag-container { width: 100%; max-width: 360px; }
             .testimonials-header-row { flex-direction: column; align-items: center; gap: 15px; }
             .reviews-nav-buttons { justify-content: center; width: 100%; }
@@ -664,62 +557,10 @@
         </div>
     </header>
 
-    <!-- 1. HERO SECTION -->
+    <!-- 1. HERO SECTION (başlık.png) -->
     <section class="hero-section">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <span class="sub-badge"><i class="fa-solid fa-fingerprint"></i> Instagram Analiz</span>
-                <h1>Instagram Hesabını <br>Detaylı <span class="highlight">Analiz</span> Et</h1>
-                <p>Takipçilerini analiz et, seni takip etmeyenleri ve engelleyenleri öğren. Hesabının tüm detaylarını görmek için Instagram ile giriş yap!</p>
-                <div class="download-buttons">
-                    <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank" class="btn-store">
-                        <i class="fa-brands fa-google-play"></i> Google Play
-                    </a>
-                    <a href="https://apps.apple.com/tr/app/instagram/id389801252" target="_blank" class="btn-store">
-                        <i class="fa-brands fa-apple"></i> App Store
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-visual-orbit">
-                <!-- Yörünge Çizgileri -->
-                <div class="orbit-line orbit-1"></div>
-                <div class="orbit-line orbit-2"></div>
-                <div class="orbit-line orbit-3"></div>
-                <div class="orbit-line orbit-4"></div>
-
-                <!-- Küçük halkalı görseller (`images/img.png`) işaretlediğin yerlere yerleştirildi -->
-                <div class="orbit-badge badge-1"><img src="images/img.png" alt="Icon"></div>
-                <div class="orbit-badge badge-2"><img src="images/img.png" alt="Icon"></div>
-                <div class="orbit-badge badge-3"><img src="images/img.png" alt="Icon"></div>
-                <div class="orbit-badge badge-4"><img src="images/img.png" alt="Icon"></div>
-                <div class="orbit-badge badge-5"><img src="images/img.png" alt="Icon"></div>
-
-                <!-- Orijinal Asimetrik 9'lu Grid Yerleşimi -->
-                <div class="cards-column-group">
-                    <div class="card-col">
-                        <div class="vertical-profile-card"><img src="images/i2.png" alt="Profile 1"></div>
-                        <div class="vertical-profile-card">
-                            <img src="images/Image 3.jpg" onerror="this.onerror=null; this.src='images/Image 3.png';" alt="Ananaslı Adam">
-                        </div>
-                        <div class="vertical-profile-card"><img src="images/Image 10.png" alt="Profile 3"></div>
-                    </div>
-
-                    <div class="card-col col-offset">
-                        <div class="vertical-profile-card"><img src="images/image1.png" alt="Profile 4"></div>
-                        <div class="vertical-profile-card">
-                            <img src="images/image 25.png" onerror="this.onerror=null; this.src='images/image 25.jpg';" alt="Doğru Adam">
-                        </div>
-                        <div class="vertical-profile-card"><img src="images/Image 13.png" alt="Profile 6"></div>
-                    </div>
-
-                    <div class="card-col">
-                        <div class="vertical-profile-card"><img src="images/Image 7.png" alt="Profile 7"></div>
-                        <div class="vertical-profile-card"><img src="images/Image 8.png" alt="Profile 8"></div>
-                        <div class="vertical-profile-card"><img src="images/Image 15.png" alt="Profile 9"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="container">
+            <img src="images/başlık.png" onerror="this.onerror=null; this.src='images/başlık.jpg';" alt="Instagram Analiz Başlık Görseli" class="hero-banner-img">
         </div>
     </section>
 
@@ -1069,43 +910,10 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="container footer-container">
-            <div class="footer-col brand-col">
-                <h3 class="footer-logo">L O <span class="highlight">G O</span></h3>
-                <p>Instagram hesabınızı en üst düzeye çıkaran akıllı analiz ve hashtag otomasyon sistemi.</p>
-                <div class="download-buttons">
-                    <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank" class="btn-store small-btn">
-                        <i class="fa-brands fa-google-play"></i> Google Play
-                    </a>
-                    <a href="https://apps.apple.com/tr/app/instagram/id389801252" target="_blank" class="btn-store small-btn">
-                        <i class="fa-brands fa-apple"></i> App Store
-                    </a>
-                </div>
-            </div>
-            
-            <div class="footer-col">
-                <h4>İletişim</h4>
-                <ul>
-                    <li><i class="fa-solid fa-phone"></i> +90 555 555 55 55</li>
-                    <li><i class="fa-solid fa-envelope"></i> info@siteadi.com</li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Sosyal Medya</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-col mockup-col">
-                <img class="footer-phone" src="images/Iphone Front.png" alt="Mockup">
-            </div>
+    <!-- FOOTER (enalt.png görseli) -->
+    <footer class="site-footer-banner">
+        <div class="container">
+            <img src="images/enalt.png" onerror="this.onerror=null; this.src='images/enalt.jpg';" alt="Footer Banner Görseli" class="footer-banner-img">
         </div>
     </footer>
 
@@ -1158,7 +966,6 @@
             }
         }
 
-        /* Yorumlar Bölümü Dikey Kaydırma Fonksiyonu */
         function scrollReviews(direction) {
             const container = document.getElementById('reviewsContainer');
             const scrollAmount = 180;
